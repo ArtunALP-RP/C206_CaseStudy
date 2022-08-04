@@ -126,7 +126,7 @@ public class moneyExchange {
 		}
 		
 		public static void calculateRate() {
-			
+			// calculator for rate
 		}
 		
 		public static void viewAllCurrency(ArrayList<Currency> currencyList) {
@@ -140,39 +140,44 @@ public class moneyExchange {
 		}
 		
 		public static void addCurrency() 	{
-			
+			// add currency to the arraylist
+			// user will input the details for the currency to be added into the list 
+			// currencyType, exchange rate, holding amt
 		}
 		
 		public static void deleteCurrency()	{
-			
+			// delete currency from the arraylist
+			// user will input the details for the currency to be deleted from the list 
+			// currencyType, exchange rate, holding amt
 		}
 		
 		public static void viewCurrencyHoldings() {
-			
+			// user can view all the currency holdings
+			// artun! to choose whether take this method out or not
 		}
 		
 		public static void increaseCurrencyHoldings() {
-			
+			// to add to the current holdings
 		}
 		
 		public static void decreaseCurrencyHoldings() {
-			
+			// to minus from the current holdings
 		}
 		
 		public static void addBuySellRate() {
-			
+			// add the buy and sell rate into the currency list
 		}
 		
 		public static void deleteBuySellRate() {
-			
+			// delete the buy and sell rate from the currency list
 		}
 		
 		public static void updateBuySellRate() {
-			
+			// update the buysell rate to the latest value
 		}
 		
 		public static void searchCurrency() {
-			
+			// search the currency based on name to display the exchange rates and holding amts
 		}
 
 	}
