@@ -21,15 +21,14 @@ public class moneyExchange {
 			if (option == 1) {
 				maintainCurrencyList_menu();
 				int exchangeType = Helper.readInt("Enter option to select item type > ");
-				
 				if (exchangeType == 1) {
 					viewAllCurrency(currencyList);
 					
 				} else if (exchangeType == 2) {
-					addCurrency();
+					addCurrency(currencyList);
 				
-				} else if (option == 3) {
-					deleteCurrency();
+				} else if (exchangeType == 3) {
+					deleteCurrency(currencyList);
 				}
 
 			} else if (option == 2) {
@@ -42,7 +41,7 @@ public class moneyExchange {
 				} else if (exchangeType == 2) {
 					increaseCurrencyHoldings();
 				
-				} else if (option == 3) {
+				} else if (exchangeType == 3) {
 					decreaseCurrencyHoldings();
 	
 				} 
@@ -57,7 +56,7 @@ public class moneyExchange {
 					deleteBuySellRate();
 
 				
-				} else if (option == 3) {
+				} else if (exchangeType == 3) {
 					updateBuySellRate();
 	
 				} 
@@ -139,16 +138,41 @@ public class moneyExchange {
 			System.out.println(cout);
 		}
 		
-		public static void addCurrency() 	{
+		public static void addCurrency(ArrayList<Currency> currencyList) {	
 			// add currency to the arraylist
 			// user will input the details for the currency to be added into the list 
 			// currencyType, exchange rate, holding amt
+			
+			String type = Helper.readString("Enter currecny type > ");
+			double rate = Helper.readDouble("Enter exchange rate type > ");
+			double holdings = Helper.readDouble("Enter holding amount type > ");
+
+			currencyList.add(new Currency(type, rate, holdings));
+			System.out.println("Currency '" + type + "' added successfuly!");
 		}
 		
-		public static void deleteCurrency()	{
+		public static void deleteCurrency(ArrayList<Currency> currencyList)	{
 			// delete currency from the arraylist
 			// user will input the details for the currency to be deleted from the list 
 			// currencyType, exchange rate, holding amt
+			String type = Helper.readString("Enter currecny type > ");
+			boolean found = false;
+			
+			for(int i = 0; i<currencyList.size(); i++){
+				if(currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)){
+					found = true;
+					boolean delete = Helper.readBoolean("Are you sure you wish to delete currency " + type + "? (y/n) > ");
+
+					if(delete){
+						currencyList.remove(i);
+						System.out.println("Currency removed successfully!");
+					}
+				}
+			}
+
+			if(!found){
+				System.out.println("Currency not found.");
+			}
 		}
 		
 		public static void viewCurrencyHoldings() {
