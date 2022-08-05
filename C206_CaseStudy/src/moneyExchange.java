@@ -43,7 +43,7 @@ public class moneyExchange {
 				int exchangeType = Helper.readInt("Enter option to select item type > ");
 
 				if (exchangeType == 1) {
-					addBuySellRate();
+					addBuySellRate(currencyList);
 
 				} else if (exchangeType == 2) {
 					deleteBuySellRate();
@@ -130,7 +130,7 @@ public class moneyExchange {
 		// user will input the details for the currency to be added into the list
 		// currencyType, exchange rate, holding amt
 
-		String type = Helper.readString("Enter currecny type > ");
+		String type = Helper.readString("Enter currency type > ");
 		double rate = Helper.readDouble("Enter exchange rate type > ");
 		double holdings = Helper.readDouble("Enter holding amount type > ");
 
@@ -142,7 +142,7 @@ public class moneyExchange {
 		// delete currency from the arraylist
 		// user will input the details for the currency to be deleted from the list
 		// currencyType, exchange rate, holding amt
-		String type = Helper.readString("Enter currecny type > ");
+		String type = Helper.readString("Enter currency type > ");
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
@@ -164,7 +164,7 @@ public class moneyExchange {
 
 	public static void increaseCurrencyHoldings(ArrayList<Currency> currencyList) {
 		// to add to the current holdings
-		String type = Helper.readString("Enter currecny type > ");
+		String type = Helper.readString("Enter currency type > ");
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
@@ -184,7 +184,7 @@ public class moneyExchange {
 
 	public static void decreaseCurrencyHoldings(ArrayList<Currency> currencyList) {
 		// to minus from the current holdings
-		String type = Helper.readString("Enter currecny type > ");
+		String type = Helper.readString("Enter currency type > ");
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
@@ -202,8 +202,25 @@ public class moneyExchange {
 		}
 	}
 
-	public static void addBuySellRate() {
+	public static void addBuySellRate(ArrayList<Currency> currencyList) {
 		// add the buy and sell rate into the currency list
+		
+		String type = Helper.readString("Enter currency > ");
+		boolean found = false;
+
+		for (int i = 0; i < currencyList.size(); i++) {
+			if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
+				found = true;
+				double addRate = Helper.readDouble("Enter new rate for BuySell > ");
+
+				currencyList.get(i).setExchangeRate(currencyList.get(i).getHoldingAmt() + addRate);
+				System.out.println("Exchange rate added successfully!");
+			}
+		}
+
+		if (!found) {
+			System.out.println("Currency not found.");
+		}
 	}
 
 	public static void deleteBuySellRate() {
