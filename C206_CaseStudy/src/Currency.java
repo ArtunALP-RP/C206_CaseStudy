@@ -5,10 +5,10 @@ public class Currency {
 	private double exchangeRate;
 	private double holdingAmt;
 	
-	public Currency(String currencyType, double exchangeRate, double holdingAmt) {
+	public Currency(String currencyType, double exchangeRate) {
 		this.currencyType = currencyType;
 		this.exchangeRate = exchangeRate;
-		this.holdingAmt = holdingAmt;
+		this.holdingAmt = 0;
 	}
 
 	public String getCurrencyType() {
