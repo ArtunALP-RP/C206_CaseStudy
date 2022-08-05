@@ -106,4 +106,25 @@ public class moneyExchangeTest {
 		assertSame("Test that Currency is added", c2, currencyList.get(1));
 	}
 	
+	//Jael
+	@Test
+	public void testBuyCurrencies() {		
+		
+		moneyExchange.buyCurrencies(currencyList, "USD", 100.0);		
+		assertEquals("Test that Currency exchanged is 73", 73, 73);		// how to compare to the value above?
+	}
+	
+//	//Jael
+//	@Test
+//	public void testSellCurrencies() {		
+//		
+//		moneyExchange.sellCurrencies(currencyList,c1);		
+//		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
+//		assertSame("Test that Currency is added", c1, currencyList.get(0));
+//		
+//		moneyExchange.addCurrency(currencyList,c2);
+//		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
+//		assertSame("Test that Currency is added", c2, currencyList.get(1));
+//	}
+	
 }

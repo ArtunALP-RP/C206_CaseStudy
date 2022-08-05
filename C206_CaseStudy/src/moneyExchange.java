@@ -78,9 +78,18 @@ public class moneyExchange {
 				int exchangeType = Helper.readInt("Enter option to Buy/Sell Currency > ");
 
 				if (exchangeType == 1) {
+					String type = Helper.readString("Enter currency type > ");
+					double amt = Helper.readDouble("Enter amount to buy > ");
+
+					buyCurrencies(currencyList, type, amt);
+					
 
 				} else if (exchangeType == 2) {
+					String type = Helper.readString("Enter currency type > ");
+					double amt = Helper.readDouble("Enter amount to sell > ");
 
+					sellCurrencies(currencyList, type, amt);
+					
 			} else if (option == 6) {
 
 				}
@@ -252,49 +261,41 @@ public class moneyExchange {
 		// amts
 	}
 	
-	public static boolean buyCurrencies(ArrayList<Currency> currencyList, String buyCurrency, double amount) {
+	public static double buyCurrencies(ArrayList<Currency> currencyList, String buyCurrency, double amount) {
 		// for adding transaction when buying currencies
 		
 		//moneyExchange.increaseCurrencyHoldings(amount);
-		
-		boolean sold = false;
-		
+		double exchangedAmt = 0;
+				
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (buyCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
 				
-				moneyExchange.decreaseCurrencyHoldings(currencyList);
 				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) + amount);
+				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) - amount);	// does not decrease SGD
+
 				
-				sold = true;
+				exchangedAmt = amount * currencyList.get(i).getBuyRate();
 			}
 		}
-		return sold;
+		return exchangedAmt;
 	}
 	
-	public static boolean sellCurrencies(ArrayList<Currency> currencyList, String sellCurrency, double amount) {
+	public static double sellCurrencies(ArrayList<Currency> currencyList, String sellCurrency, double amount) {
 		// for adding transaction when selling currencies
-//		String sellCurrency = Helper.readString("Enter the ISO code of the currency you would like to buy > ");
-//		double amount = Helper.readDouble("What is the amount you would like to buy?");
 		
-		boolean sold = false;
+		double exchangedAmt = 0;
 		
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (sellCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
 				
-				// decrease amount from holding amount
-				moneyExchange.decreaseCurrencyHoldings(currencyList);
-				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) + amount);
+				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) - amount);
+				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) + amount);		// does not increase sgd
+
 				
-				sold = true;
+				exchangedAmt = amount * currencyList.get(i).getBuyRate();
 			}
 		}
-		return sold;
-
+		return exchangedAmt;
 	}
-	
-	public static void addTransaction() {
-		// add transaction when user keys in a transaction with a customer
-	}
-
 
 }
