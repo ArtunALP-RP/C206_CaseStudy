@@ -26,7 +26,7 @@ public class moneyExchange {
 				maintainCurrencyList_menu();
 				int exchangeType = Helper.readInt("Enter option to select item type > ");
 				if (exchangeType == 1) {
-					viewAllCurrency(currencyList);
+					System.out.println(viewAllCurrency(currencyList));
 				} else if (exchangeType == 2) {
 					String type = Helper.readString("Enter currency type > ");
 					double rate = Helper.readDouble("Enter buy rate > ");
@@ -139,14 +139,14 @@ public class moneyExchange {
 		// calculator for rate
 	}
 
-	public static void viewAllCurrency(ArrayList<Currency> currencyList) {
+	public static String viewAllCurrency(ArrayList<Currency> currencyList) {
 		setHeader("VIEW ALL CURRENCIES");
 		String cout = String.format("%-15s%-15s%-15s%-15s\n", "TYPE", "BUY RATE", "SELL RATE", "CURRENT HOLDINGS");
 		for (Currency c : currencyList) {
 			cout += String.format("%-15s%-15.2f%-15.2f%-15.2f\n", c.getCurrencyType(), c.getBuyRate(), c.getSellRate(), c.getHoldingAmt());
 		}
 
-		System.out.println(cout);
+		return cout;
 	}
 
 	public static void addCurrency(ArrayList<Currency> currencyList, Currency c) {
