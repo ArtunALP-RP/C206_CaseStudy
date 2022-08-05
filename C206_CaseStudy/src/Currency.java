@@ -2,12 +2,14 @@
 public class Currency {
 
 	private String currencyType;
-	private double exchangeRate;
+	private double buyRate;
+	private double sellRate;
 	private double holdingAmt;
 	
-	public Currency(String currencyType, double exchangeRate) {
+	public Currency(String currencyType, double buyRate, double sellRate) {
+		this.sellRate = sellRate;
 		this.currencyType = currencyType;
-		this.exchangeRate = exchangeRate;
+		this.buyRate = buyRate;
 		this.holdingAmt = 0;
 	}
 
@@ -19,12 +21,19 @@ public class Currency {
 		this.currencyType = currencyType;
 	}
 
-	public double getExchangeRate() {
-		return exchangeRate;
+	public double getBuyRate() {
+		return buyRate;
 	}
 
-	public void setExchangeRate(double exchangeRate) {
-		this.exchangeRate = exchangeRate;
+	public double getSellRate(){
+		return sellRate;
+	}
+	public void setBuyRate(double rate) {
+		this.buyRate = rate;
+	}
+
+	public void setSellRate(double rate){
+		this.sellRate = rate;
 	}
 
 	public double getHoldingAmt() {
