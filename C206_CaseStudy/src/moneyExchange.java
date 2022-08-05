@@ -5,9 +5,15 @@ public class moneyExchange {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		final Currency BASE = new Currency("SGD", 1);
+		BASE.setHoldingAmt(1000);
+
 		ArrayList<Currency> currencyList = new ArrayList<Currency>();
-		currencyList.add(new Currency("USD", 1.5, 200));
-		currencyList.add(new Currency("CD", 1.1, 240));
+		currencyList.add(BASE);
+		currencyList.add(new Currency("USD", 1.5));
+		currencyList.get(1).setHoldingAmt(1000);
+		currencyList.add(new Currency("CD", 1.1));
+		currencyList.get(2).setHoldingAmt(1000);
 
 		int option = 0;
 
@@ -132,9 +138,8 @@ public class moneyExchange {
 
 		String type = Helper.readString("Enter currecny type > ");
 		double rate = Helper.readDouble("Enter exchange rate type > ");
-		double holdings = Helper.readDouble("Enter holding amount type > ");
 
-		currencyList.add(new Currency(type, rate, holdings));
+		currencyList.add(new Currency(type, rate));
 		System.out.println("Currency '" + type + "' added successfuly!");
 	}
 
