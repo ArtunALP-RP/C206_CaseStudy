@@ -55,16 +55,28 @@ public class moneyExchangeTest {
 	}
 	
 	@Test
-	public void testIncreaseCurrencyHolding() {		// undone
-		assertNotNull("Test if there is valid Chromebook arraylist to add to", currencyList);
+	public void testIncreaseCurrencyHolding() {		
+		assertNotNull("Test if there is valid Currency Holdings to increase", currencyList);
 		
 		moneyExchange.addCurrency(currencyList,c1);		
-		assertEquals("Test that Chromebook arraylist size is 1", 1, currencyList.size());
-		assertSame("Test that Chromebook is added", c1, currencyList.get(0));
+		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
+		assertSame("Test that Currency is added", c1, currencyList.get(0));
 		
 		moneyExchange.addCurrency(currencyList,c2);
-		assertEquals("Test that Chromebook arraylist size is 2", 2, currencyList.size());
-		assertSame("Test that Chromebook is added", c2, currencyList.get(1));
+		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
+		assertSame("Test that Currency is added", c2, currencyList.get(1));
+	}
+	
+	public void testDecreaseCurrencyHolding() {		
+		assertNotNull("Test if there is valid Currency arraylist to add to", currencyList);
+		
+		moneyExchange.addCurrency(currencyList,c1);		
+		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
+		assertSame("Test that Currency is added", c1, currencyList.get(0));
+		
+		moneyExchange.addCurrency(currencyList,c2);
+		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
+		assertSame("Test that Currency is added", c2, currencyList.get(1));
 	}
 	
 }
