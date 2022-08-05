@@ -5,14 +5,14 @@ public class moneyExchange {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		final Currency BASE = new Currency("SGD", 1);
+		final Currency BASE = new Currency("SGD", 1, 1);
 		BASE.setHoldingAmt(1000);
 
 		ArrayList<Currency> currencyList = new ArrayList<Currency>();
 		currencyList.add(BASE);
-		currencyList.add(new Currency("USD", 1.5));
+		currencyList.add(new Currency("USD", 1.5, 1.5));
 		currencyList.get(1).setHoldingAmt(1000);
-		currencyList.add(new Currency("CD", 1.1));
+		currencyList.add(new Currency("CD", 1.1, 1.5));
 		currencyList.get(2).setHoldingAmt(1000);
 
 		int option = 0;
@@ -27,12 +27,16 @@ public class moneyExchange {
 				int exchangeType = Helper.readInt("Enter option to select item type > ");
 				if (exchangeType == 1) {
 					viewAllCurrency(currencyList);
-
 				} else if (exchangeType == 2) {
-					addCurrency(currencyList);
+					String type = Helper.readString("Enter currency type > ");
+					double rate = Helper.readDouble("Enter buy rate > ");
+					double rate2 = Helper.readDouble("Enter sell rate > ");
+					Currency c = new Currency(type.toUpperCase(), rate, rate2);
+					addCurrency(currencyList, c);
 
 				} else if (exchangeType == 3) {
-					deleteCurrency(currencyList);
+					String type = Helper.readString("Enter currency type > ");
+					deleteCurrency(currencyList, type);
 				}
 
 			} else if (option == 2) {
@@ -49,7 +53,7 @@ public class moneyExchange {
 				int exchangeType = Helper.readInt("Enter option to select item type > ");
 
 				if (exchangeType == 1) {
-					addBuySellRate(currencyList);
+					addBuyRate(currencyList);
 
 				} else if (exchangeType == 2) {
 					deleteBuySellRate();
@@ -124,38 +128,31 @@ public class moneyExchange {
 
 	public static void viewAllCurrency(ArrayList<Currency> currencyList) {
 		setHeader("VIEW ALL CURRENCIES");
-		String cout = String.format("%-15s%-15s%-15s\n", "TYPE", "EXCHANGE RATE", "CURRENT HOLDINGS");
+		String cout = String.format("%-15s%-15s%-15s%-15s\n", "TYPE", "BUY RATE", "SELL RATE", "CURRENT HOLDINGS");
 		for (Currency c : currencyList) {
-			cout += String.format("%-15s%-15.2f%-15.2f\n", c.getCurrencyType(), c.getExchangeRate(), c.getHoldingAmt());
+			cout += String.format("%-15s%-15.2f%-15.2f%-15.2f\n", c.getCurrencyType(), c.getBuyRate(), c.getSellRate(), c.getHoldingAmt());
 		}
 
 		System.out.println(cout);
 	}
 
-	public static void addCurrency(ArrayList<Currency> currencyList) {
-		// add currency to the arraylist
-		// user will input the details for the currency to be added into the list
-		// currencyType, exchange rate, holding amt
-
-		String type = Helper.readString("Enter currency type > ");
-		double rate = Helper.readDouble("Enter exchange rate type > ");
-
-		currencyList.add(new Currency(type, rate));
-		System.out.println("Currency '" + type + "' added successfuly!");
+	public static void addCurrency(ArrayList<Currency> currencyList, Currency c) {
+		currencyList.add(c);
+		System.out.println("Currency '" + c.getCurrencyType().toUpperCase() + "' added successfuly!");
 	}
 
-	public static void deleteCurrency(ArrayList<Currency> currencyList) {
+	public static void deleteCurrency(ArrayList<Currency> currencyList, String type) {
 		// delete currency from the arraylist
 		// user will input the details for the currency to be deleted from the list
 		// currencyType, exchange rate, holding amt
-		String type = Helper.readString("Enter currency type > ");
+		
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
 				found = true;
-				boolean delete = Helper.readBoolean("Are you sure you wish to delete currency " + type + "? (y/n) > ");
-
+				//boolean delete = Helper.readBoolean("Are you sure you wish to delete currency " + type.toUpperCase() + "? (y/n) > ");
+				boolean delete = true;
 				if (delete) {
 					currencyList.remove(i);
 					System.out.println("Currency removed successfully!");
@@ -208,18 +205,18 @@ public class moneyExchange {
 		}
 	}
 
-	public static void addBuySellRate(ArrayList<Currency> currencyList) {
+	public static void addBuyRate(ArrayList<Currency> currencyList) {
 		// add the buy and sell rate into the currency list
 		
-		String type = Helper.readString("Enter currency > ");
+		String type = Helper.readString("Enter currency type > ");
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
 				found = true;
-				double addRate = Helper.readDouble("Enter new rate for BuySell > ");
+				double addRate = Helper.readDouble("Enter new buy rate > ");
 
-				currencyList.get(i).setExchangeRate(currencyList.get(i).getHoldingAmt() + addRate);
+				currencyList.get(i);
 				System.out.println("Exchange rate added successfully!");
 			}
 		}

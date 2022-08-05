@@ -1,5 +1,6 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
 import java.util.ArrayList;
@@ -19,63 +20,49 @@ public class moneyExchangeTest {
 	@Before
 	public void setUp() throws Exception {
 		// prepare test data
-		c1 = new Currency("USD", 0.73);
-		c2 = new Currency("AUD", 1.04);
-		c3 = new Currency("EUR", 1.41);
-		c4 = new Currency("MYR", 3.22);
+		c1 = new Currency("USD", 0.73, 0.73);
+		c2 = new Currency("AUD", 1.04, 1.04);
+		c3 = new Currency("EUR", 1.41, 1.41);
+		c4 = new Currency("MYR", 3.22, 3.22);
 
 		currencyList= new ArrayList<Currency>();
 	}
 	
 	@Test
 	public void testAddCurrency() {
-		// Item list is not null, so that can add a new item - boundary
-		assertNotNull("Check if there is valid Camcorder arraylist to add to", currencyList);
-		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
-		moneyExchange.addCurrency(currencyList);
-		assertEquals("Check that Camcorder arraylist size is 1", 1, currencyList.size());
-		assertSame("Check that Camcorder is added", c1, currencyList.get(0));
+		//assertNotNull("Check if there is valid Camcorder arraylist to add to", currencyList);
+		assertNotNull("Check if there is a valid arraylist to add to", currencyList);
 		
-		//Add another item. test The size of the list is 2? -normal
-		//The item just added is as same as the second item of the list
-		moneyExchange.addCurrency(currencyList);
-		assertEquals("Check that Camcorder arraylist size is 2", 2, currencyList.size());
-		assertSame("Check that Camcorder is added", c2, currencyList.get(1));
+		moneyExchange.addCurrency(currencyList, c1);
+		assertEquals("Check that Currency arraylist size is 1", 1, currencyList.size());
+		assertSame("Check that Currency is added", c1, currencyList.get(0));
+		
+		moneyExchange.addCurrency(currencyList, c2);
+		assertEquals("Check that Currency arraylist size is 2", 2, currencyList.size());
+		assertSame("Check that Currency is added", c2, currencyList.get(1));
 	}
 	
 	@Test
 	public void testDeleteCurrency() {
-		// Item list is not null, so that can add a new item - boundary
-		assertNotNull("Test if there is valid Chromebook arraylist to add to", currencyList);
-		
-		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
-		moneyExchange.addCurrency(currencyList);		
-		assertEquals("Test that Chromebook arraylist size is 1", 1, currencyList.size());
-		assertSame("Test that Chromebook is added", c1, currencyList.get(0));
-		
-		//Add another item. test The size of the list is 2? - normal
-		//The item just added is as same as the second item of the list
-		moneyExchange.addCurrency(currencyList);
-		assertEquals("Test that Chromebook arraylist size is 2", 2, currencyList.size());
-		assertSame("Test that Chromebook is added", c2, currencyList.get(1));
+		assertNotNull("Test if there is valid Currency arraylist to add to", currencyList);
+		moneyExchange.addCurrency(currencyList, c1);
+
+		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
+		assertSame("Test that Currency is added", c1, currencyList.get(0));
+		String type = c1.getCurrencyType();
+		moneyExchange.deleteCurrency(currencyList, type);
+		assertEquals("Test that Currency arraylist size is 0", 0, currencyList.size());
 	}
 	
 	@Test
 	public void testIncreaseCurrencyHolding() {		// undone
-		// Item list is not null, so that can add a new item - boundary
 		assertNotNull("Test if there is valid Chromebook arraylist to add to", currencyList);
 		
-		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
-		moneyExchange.addCurrency(currencyList);		
+		moneyExchange.addCurrency(currencyList,c1);		
 		assertEquals("Test that Chromebook arraylist size is 1", 1, currencyList.size());
 		assertSame("Test that Chromebook is added", c1, currencyList.get(0));
 		
-		//Add another item. test The size of the list is 2? - normal
-		//The item just added is as same as the second item of the list
-		moneyExchange.addCurrency(currencyList);
+		moneyExchange.addCurrency(currencyList,c2);
 		assertEquals("Test that Chromebook arraylist size is 2", 2, currencyList.size());
 		assertSame("Test that Chromebook is added", c2, currencyList.get(1));
 	}
