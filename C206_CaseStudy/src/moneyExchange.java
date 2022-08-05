@@ -17,7 +17,7 @@ public class moneyExchange {
 
 		int option = 0;
 
-		while (option != 5) {
+		while (option != 6) {
 
 			moneyExchange.menu();
 			option = Helper.readInt("Enter an option > ");
@@ -70,10 +70,16 @@ public class moneyExchange {
 
 				}
 			} else if (option == 5) {
-				addTransaction();
+				transaction_menu();
+				int exchangeType = Helper.readInt("Enter option to Buy/Sell Currency > ");
+
+				if (exchangeType == 1) {
+
+				} else if (exchangeType == 2) {
 
 			} else if (option == 6) {
 
+				}
 			}
 		}
 	}
@@ -109,6 +115,13 @@ public class moneyExchange {
 		System.out.println("1. Add Buy/Sell Rate");
 		System.out.println("2. Delete Buy/Sell Rate");
 		System.out.println("3. Update Buy/Sell Rate");
+		Helper.line(80, "-");
+	}
+	
+	public static void transaction_menu() {
+		moneyExchange.setHeader("TRANSACTION MENU");
+		System.out.println("1. Buy");
+		System.out.println("2. Sell");
 		Helper.line(80, "-");
 	}
 
@@ -199,7 +212,7 @@ public class moneyExchange {
 				double newHolding = Helper.readDouble("Enter new amount to decrease holding > ");
 
 				currencyList.get(i).setHoldingAmt(currencyList.get(i).getHoldingAmt() - newHolding);
-				System.out.println("Holding amount decreased	 successfully!");
+				System.out.println("Holding amount decreased successfully!");
 			}
 		}
 
@@ -244,10 +257,21 @@ public class moneyExchange {
 	
 	public static void buyCurrencies() {
 		// for adding transaction when buying currencies
+		String buyingCurrency = Helper.readString("Enter the ISO code of the currency you would like to sell > ");
+		double amount = Helper.readDouble("What is the amount you would like to sell?");
+		
+		//moneyExchange.increaseCurrencyHoldings(amount);
+		
 	}
 	
 	public static void sellCurrencies() {
 		// for adding transaction when selling currencies
+		String sellCurrency = Helper.readString("Enter the ISO code of the currency you would like to buy > ");
+		double amount = Helper.readDouble("What is the amount you would like to buy?");
+		
+
+		//moneyExchange.decreaseCurrencyHoldings(amount);
+
 	}
 	
 	public static void addTransaction() {
