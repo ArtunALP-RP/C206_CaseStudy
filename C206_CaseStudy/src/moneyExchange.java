@@ -242,6 +242,14 @@ public class moneyExchange {
 		// amts
 	}
 	
+	public static void buyCurrencies() {
+		// for adding transaction when buying currencies
+	}
+	
+	public static void sellCurrencies() {
+		// for adding transaction when selling currencies
+	}
+	
 	public static void addTransaction() {
 		// add transaction when user keys in a transaction with a customer
 	}
