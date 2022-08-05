@@ -243,7 +243,7 @@ public class moneyExchange {
 	}
 	
 	public static void addTransaction() {
-		
+		// add transaction when user keys in a transaction with a customer
 	}
 
 
