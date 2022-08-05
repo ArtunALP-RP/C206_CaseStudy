@@ -199,7 +199,7 @@ public class moneyExchange {
 				double newHolding = Helper.readDouble("Enter new amount to decrease holding > ");
 
 				currencyList.get(i).setHoldingAmt(currencyList.get(i).getHoldingAmt() - newHolding);
-				System.out.println("Holding amount decreased	 successfully!");
+				System.out.println("Holding amount decreased successfully!");
 			}
 		}
 
