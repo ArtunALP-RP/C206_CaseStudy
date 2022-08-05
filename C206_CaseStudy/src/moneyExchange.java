@@ -252,22 +252,43 @@ public class moneyExchange {
 		// amts
 	}
 	
-	public static void buyCurrencies() {
+	public static boolean buyCurrencies(ArrayList<Currency> currencyList, String buyCurrency, double amount) {
 		// for adding transaction when buying currencies
-		String buyingCurrency = Helper.readString("Enter the ISO code of the currency you would like to sell > ");
-		double amount = Helper.readDouble("What is the amount you would like to sell?");
 		
 		//moneyExchange.increaseCurrencyHoldings(amount);
 		
+		boolean sold = false;
+		
+		for (int i = 0; i < currencyList.size(); i++) {
+			if (buyCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
+				
+				moneyExchange.decreaseCurrencyHoldings(currencyList);
+				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) + amount);
+				
+				sold = true;
+			}
+		}
+		return sold;
 	}
 	
-	public static void sellCurrencies() {
+	public static boolean sellCurrencies(ArrayList<Currency> currencyList, String sellCurrency, double amount) {
 		// for adding transaction when selling currencies
-		String sellCurrency = Helper.readString("Enter the ISO code of the currency you would like to buy > ");
-		double amount = Helper.readDouble("What is the amount you would like to buy?");
+//		String sellCurrency = Helper.readString("Enter the ISO code of the currency you would like to buy > ");
+//		double amount = Helper.readDouble("What is the amount you would like to buy?");
 		
-
-		//moneyExchange.decreaseCurrencyHoldings(amount);
+		boolean sold = false;
+		
+		for (int i = 0; i < currencyList.size(); i++) {
+			if (sellCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
+				
+				// decrease amount from holding amount
+				moneyExchange.decreaseCurrencyHoldings(currencyList);
+				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) + amount);
+				
+				sold = true;
+			}
+		}
+		return sold;
 
 	}
 	
