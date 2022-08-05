@@ -70,6 +70,7 @@ public class moneyExchange {
 
 				}
 			} else if (option == 5) {
+				addTransaction();
 
 			} else if (option == 6) {
 
@@ -240,5 +241,10 @@ public class moneyExchange {
 		// search the currency based on name to display the exchange rates and holding
 		// amts
 	}
+	
+	public static void addTransaction() {
+		
+	}
+
 
 }
