@@ -52,7 +52,7 @@ public class moneyExchangeTest {
 	@Test
 	//Artun
 	public void testAddCurrency() {
-		//assertNotNull("Check if there is valid Camcorder arraylist to add to", currencyList);
+		//assertNotNull("Check if there is valid Currency arraylist to add to", currencyList);
 		assertNotNull("Check if there is a valid arraylist to add to", currencyList);
 		
 		moneyExchange.addCurrency(currencyList, c1);
