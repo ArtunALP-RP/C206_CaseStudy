@@ -85,7 +85,7 @@ public class moneyExchangeTest {
 		
 		moneyExchange.addCurrency(currencyList,c1);		
 		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
-		assertSame("Test that Currency is added", c1, currencyList.get(0));
+		assertSame("Test that Currency Holdings is increased", c1, currencyList.get(0));
 		
 		moneyExchange.addCurrency(currencyList,c2);
 		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
@@ -95,7 +95,7 @@ public class moneyExchangeTest {
 	//Antoinette
 	@Test
 	public void testDecreaseCurrencyHolding() {		
-		assertNotNull("Test if there is valid Currency arraylist to add to", currencyList);
+		assertNotNull("Test that keyed in Currency ISO code exists", currencyList);
 		
 		moneyExchange.addCurrency(currencyList,c1);		
 		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
