@@ -17,7 +17,7 @@ public class moneyExchange {
 
 		int option = 0;
 
-		while (option != 6) {
+		while (option != 7) {
 
 			moneyExchange.menu();
 			option = Helper.readInt("Enter an option > ");
@@ -63,16 +63,8 @@ public class moneyExchange {
 
 				}
 			} else if (option == 4) {
-				searchCurrency();
-				int exchangeType = Helper.readInt("Enter option to select item type > ");
-
-				if (exchangeType == 1) {
-
-				} else if (exchangeType == 2) {
-
-				} else if (exchangeType == 3) {
-
-				}
+				searchCurrency(currencyList);
+				
 			} else if (option == 5) {
 				transaction_menu();
 				int exchangeType = Helper.readInt("Enter option to Buy/Sell Currency > ");
@@ -89,10 +81,18 @@ public class moneyExchange {
 					double amt = Helper.readDouble("Enter amount to sell > ");
 
 					sellCurrencies(currencyList, type, amt);
+				}
 					
 			} else if (option == 6) {
+                Calculator_menu();
+                int exchangeType = Helper.readInt("Enter option to select item type > ");
 
-				}
+                if (exchangeType == 1) {
+                    calculateBuy(currencyList);
+                }
+                else if (exchangeType == 2) {
+                    calculateSell(currencyList);
+                }
 			}
 		}
 	}
@@ -104,7 +104,8 @@ public class moneyExchange {
 		System.out.println("3. Maintain Currency Rates");
 		System.out.println("4. Search Currency Rates");
 		System.out.println("5. Add Transaction");
-		System.out.println("6. Quit");
+		System.out.println("6. Calculator");
+		System.out.println("7. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -143,10 +144,57 @@ public class moneyExchange {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
+	
+	public static String calculateBuy(ArrayList<Currency> currencyList) {
+        setHeader("CALCULATOR");
+        String type = Helper.readString("Enter ISO type > ");
+        boolean found = false;
+        String output = "";
 
-	public static void calculateRate() {
-		// calculator for rate
-	}
+        for (int i = 0; i < currencyList.size(); i++)
+        {
+            if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
+                found = true;
+                double amount = Helper.readDouble("Enter amount you want to buy > ");
+                double finalamount = amount * currencyList.get(i).getBuyRate();
+                output += String.format("Amount you will pay for buying %.2f %s will be %.2f SGD", amount, currencyList.get(i).getCurrencyType(), finalamount);
+                System.out.println(output);
+            }
+        }
+        if (!found) {
+            System.out.println("Invalid ISO code");
+        }
+        return output;
+    }
+	
+	public static String calculateSell(ArrayList<Currency> currencyList) {
+        setHeader("CALCULATOR");
+        String type = Helper.readString("Enter ISO type > ");
+        boolean found = false;
+        String output = "";
+
+        for (int i = 0; i < currencyList.size(); i++)
+        {
+            if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
+                found = true;
+                double amount = Helper.readDouble("Enter amount you want to sell > ");
+                double finalamount = amount * currencyList.get(i).getSellRate();
+                output += String.format("Amount you will recieve for selling %.2f %s will be %.2f SGD", amount, currencyList.get(i).getCurrencyType(), finalamount);
+                System.out.println(output);
+            }
+        }
+        if (!found) {
+            System.out.println("Invalid ISO code");
+        }
+        return output;
+    }
+	
+	public static void Calculator_menu() {
+        moneyExchange.setHeader("CALCULATOR MENU");
+        System.out.println("1. BUY");
+        System.out.println("2. SELL");
+        Helper.line(80, "-");
+    }
 
 	public static String viewAllCurrency(ArrayList<Currency> currencyList) {
 		setHeader("VIEW ALL CURRENCIES");
@@ -256,10 +304,26 @@ public class moneyExchange {
 		// update the buysell rate to the latest value
 	}
 
-	public static void searchCurrency() {
-		// search the currency based on name to display the exchange rates and holding
-		// amts
-	}
+	public static String searchCurrency(ArrayList<Currency> currencyList) {
+        // search the currency based on name to display the exchange rates and holding
+        // amts
+        String output = "";
+        String type = Helper.readString("Enter Currency type to search > ");
+        boolean found = false;
+        output += String.format("%-15s%-15s%-15s\n", "TYPE", "BUY RATE", "SELL RATE");
+
+        for (int i = 0; i < currencyList.size(); i++) {
+                if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
+                    found = true;
+                    output += String.format("%-15s%-15.2f%-15.2f\n", currencyList.get(i).getCurrencyType(), currencyList.get(i).getBuyRate(), currencyList.get(i).getSellRate());
+                    System.out.println(output);
+                    }
+                }
+                if (!found) {
+                    System.out.println("Invalid ISO code");
+            }
+        return output;
+    }
 	
 	public static double buyCurrencies(ArrayList<Currency> currencyList, String buyCurrency, double amount) {
 		// for adding transaction when buying currencies
