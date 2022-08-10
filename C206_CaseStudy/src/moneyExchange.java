@@ -324,14 +324,13 @@ public class moneyExchange {
 	public static double buyCurrencies(ArrayList<Currency> currencyList, String buyCurrency, double amount) {
 		// for adding transaction when buying currencies
 		
-		//moneyExchange.increaseCurrencyHoldings(amount);
 		double exchangedAmt = 0;
 				
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (buyCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
 				
 				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) + amount);
-				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) - amount);	// does not decrease SGD
+				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) - amount);
 
 				
 				exchangedAmt = amount * currencyList.get(i).getBuyRate();
@@ -349,7 +348,7 @@ public class moneyExchange {
 			if (sellCurrency.equalsIgnoreCase(currencyList.get(i).getCurrencyType())) {
 				
 				currencyList.get(i).setHoldingAmt((currencyList.get(i).getHoldingAmt()) - amount);
-				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) + amount);		// does not increase sgd
+				currencyList.get(0).setHoldingAmt((currencyList.get(0).getHoldingAmt()) + amount);		
 
 				
 				exchangedAmt = amount * currencyList.get(i).getBuyRate();
