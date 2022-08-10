@@ -142,17 +142,13 @@ public class moneyExchange {
 	}
 
 	public static void deleteCurrency(ArrayList<Currency> currencyList, String type) {
-		// delete currency from the arraylist
-		// user will input the details for the currency to be deleted from the list
-		// currencyType, exchange rate, holding amt
-		
 		boolean found = false;
 
 		for (int i = 0; i < currencyList.size(); i++) {
 			if (currencyList.get(i).getCurrencyType().equalsIgnoreCase(type)) {
 				found = true;
-				//boolean delete = Helper.readBoolean("Are you sure you wish to delete currency " + type.toUpperCase() + "? (y/n) > ");
-				boolean delete = true;
+				boolean delete = Helper.readBoolean("Are you sure you wish to delete currency " + type.toUpperCase() + "? (y/n) > ");
+				//boolean delete = true;
 				if (delete) {
 					currencyList.remove(i);
 					System.out.println("Currency removed successfully!");

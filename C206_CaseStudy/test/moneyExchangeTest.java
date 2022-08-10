@@ -75,6 +75,10 @@ public class moneyExchangeTest {
 		String type = c1.getCurrencyType();
 		moneyExchange.deleteCurrency(currencyList, type);
 		assertEquals("Test that Currency arraylist size is 0", 0, currencyList.size());
+
+		moneyExchange.addCurrency(currencyList, c2);
+		moneyExchange.deleteCurrency(currencyList, type);
+		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
 	}
 	
 
