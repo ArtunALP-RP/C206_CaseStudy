@@ -83,13 +83,11 @@ public class moneyExchangeTest {
 	public void testIncreaseCurrencyHolding() {		
 		assertNotNull("Test that keyed in Currency ISO code exists", currencyList);
 		
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
 		moneyExchange.addCurrency(currencyList,c1);		
-		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
+		assertEquals("Test that Currency arraylist size is 1 after increasing Currency Holdings", 1, currencyList.size());
 		assertSame("Test that Currency Holdings is increased", c1, currencyList.get(0));
-		
-		moneyExchange.addCurrency(currencyList,c2);
-		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
-		assertSame("Test that Currency is added", c2, currencyList.get(1));
 	}
 	
 	//Antoinette
@@ -98,12 +96,8 @@ public class moneyExchangeTest {
 		assertNotNull("Test that keyed in Currency ISO code exists", currencyList);
 		
 		moneyExchange.addCurrency(currencyList,c1);		
-		assertEquals("Test that Currency arraylist size is 1", 1, currencyList.size());
-		assertSame("Test that Currency is added", c1, currencyList.get(0));
-		
-		moneyExchange.addCurrency(currencyList,c2);
-		assertEquals("Test that Currency arraylist size is 2", 2, currencyList.size());
-		assertSame("Test that Currency is added", c2, currencyList.get(1));
+		assertEquals("Test that Currency arraylist size is 0 after decreasing Currency Holdings", 1, currencyList.size());
+		assertSame("Test that Currency Holdings is decreased", c1, currencyList.get(0));
 	}
 	
 	//Jael
